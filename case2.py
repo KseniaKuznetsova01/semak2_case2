@@ -1,3 +1,5 @@
+from typing import List, Any
+
 import local as lc
 import os, os.path
 
@@ -44,7 +46,7 @@ while menu != 7:
                 print(i)
         menu = int(input())
     if menu == 4:
-        list1 = os.listdir(dir)
+        list1 = os.listdir(path)
         number_files = len(list)
         print(number_files)
         menu = int(input())
