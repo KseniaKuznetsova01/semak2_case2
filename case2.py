@@ -1,5 +1,5 @@
 from typing import List, Any
-
+import glob
 import local as lc
 import os, os.path
 
@@ -49,4 +49,7 @@ while menu != 7:
         list1 = os.listdir(path)
         number_files = len(list)
         print(number_files)
+        menu = int(input())
+    if menu == 5:
+        os..count.Bytes(path)
         menu = int(input())
