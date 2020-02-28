@@ -2,6 +2,8 @@ from typing import List, Any
 import glob
 import local as lc
 import os, os.path
+from os.path import isfile, join, exists
+import sys
 
 
 def catalog_go(path, level=1):
@@ -24,6 +26,7 @@ if os.path.isfile(path):
 if os.path.isdir(path):
     c += 1
 menu = int(input(lc.MENU))
+
 catalog_go(path)
 lel = 1
 
@@ -46,10 +49,21 @@ while menu != 7:
                 print(i)
         menu = int(input())
     if menu == 4:
-        list1 = os.listdir(path)
-        number_files = len(list)
-        print(number_files)
+        count = 0
+        for directory, subdirectory, files in os.walk(path):
+            count += 1
+        print(count)
         menu = int(input())
-    if menu == 5:
-        os..count.Bytes(path)
+    if menu ==5:
+        print(sum(os.path.getsize(f) for f in os.listdir('.') if os.path.isfile(f)))
         menu = int(input())
+    if menu ==6: # поиск файла
+        def get_dir(path):
+            for directory in os.listdir(path):
+                full = join(path, directory)
+                print(full)
+                if not isfile(full):
+                    if exists(full):
+                        yield full
+
+        get_dir(path)
