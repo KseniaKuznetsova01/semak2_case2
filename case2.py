@@ -17,6 +17,61 @@ def catalog_go(path, level=1):
 
 path = input(lc.PATH)
 
+def moveUp():
+    '''На уровень вверх'''
+    path = os.getcwd()
+    path = path.split('\\')
+    path = path[:len(path)-1]
+    path = "\\".join(path)
+    os.chdir(path)
+    return path
+
+
+def moveDown(path):
+    '''На уровень вниз'''
+    while True:
+        try:
+            path = path + '\\' + input(local.INP)
+            os.chdir(path)
+            print(os.getcwd())
+            break
+        except FileNotFoundError:
+            print(local.ERROR2)
+        return path
+
+
+def countFiles(dir, list_of_files):
+    '''Количество файлов в каталоге и подкаталогах'''
+    for name in os.listdir(dir):
+        path = os.path.join(dir, name)
+        if os.path.isfile(path):
+            list_of_files.append(path)
+        else:
+            countFiles(path, list_of_files)
+    return len(list_of_files)
+
+
+def countBytes(dir, size):
+    '''Размер каталога, включая подкаталоги'''
+    for name in os.listdir(dir):
+        path = os.path.join(dir, name)
+        if os.path.isfile(path):
+            size += os.path.getsize(path)
+        else:
+            countBytes(path, size)
+    return size
+
+
+def findFiles(target, dir):
+    '''Поиск файла в каталоге и подкаталогах'''
+    for name in os.listdir(dir):
+        path = os.path.join(dir, name)
+        if os.path.isfile(path) and name == target:
+            print(local.FIND)
+            return path
+        else:
+            return findFiles(target, dir)
+
 b = 0
 c = 0
 list = []
@@ -43,27 +98,15 @@ while menu != 7:
                 print(i)
         menu = int(input())
     if menu == 3:
-        lel += 1
-        for i in list:
-            if int(i[1]) == lel:
-                print(i)
+        moveDown(path)
         menu = int(input())
     if menu == 4:
-        count = 0
-        for directory, subdirectory, files in os.walk(path):
-            count += 1
-        print(count)
+        countFiles(dir, list_of_files)
         menu = int(input())
     if menu ==5:
-        print(sum(os.path.getsize(f) for f in os.listdir('.') if os.path.isfile(f)))
+        countBytes(dir, size)
+
         menu = int(input())
     if menu ==6: # поиск файла
-        def get_dir(path):
-            for directory in os.listdir(path):
-                full = join(path, directory)
-                print(full)
-                if not isfile(full):
-                    if exists(full):
-                        yield full
+        findFiles(target, dir)
 
-        get_dir(path)
