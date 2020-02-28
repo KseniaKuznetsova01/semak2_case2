@@ -60,7 +60,7 @@ try:
             for directory, subdirectory, files in os.walk(path):
                 if files:
                     count += 1
-                elif subdirectory:
+                elif subdirectory or directory:
                     c += 1
             print(lc.FILE, count)
             print(lc.DIR, c)
