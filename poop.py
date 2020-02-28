@@ -1,6 +1,10 @@
 import local as lc
 import os, os.path
 
+def func(na)
+
+
+
 path = input(lc.PATH)
 list = []
 level = 1
@@ -56,3 +60,4 @@ while menu > 0 and menu < 8:
 
 else:
     print('ERROR')
+
