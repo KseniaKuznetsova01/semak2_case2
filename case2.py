@@ -79,9 +79,9 @@ try:
                             print(name)
                             if os.path.isfile(path) and name == name_file:
                                 print(path)
-        if menu == 7:
-            print(lc.END)
-            break
+    if menu == 7:
+        print(lc.END)
+
     else:
         print(lc.ERROR)
 
